@@ -6,8 +6,8 @@ import CosmicBadge from '@/components/CosmicBadge'
 import { getSettings } from '@/lib/cosmic'
 
 export const metadata: Metadata = {
-  title: 'TherapyAlly Clinician',
-  description: 'AI-powered practice platform for clinicians',
+  title: 'Clinician Console - Therapy Ally',
+  description: 'Clinician dashboard for monitoring client progress and managing therapy sessions.',
 }
 
 export default async function RootLayout({
@@ -32,9 +32,9 @@ export default async function RootLayout({
           href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>"
         />
         <script src="/dashboard-console-capture.js" />
-              <script defer src="https://insights.cosmicinsights.dev/script.js" data-project="6a2aecb5c3293c121782ac98"></script>
+        <script defer src="https://insights.cosmicinsights.dev/script.js" data-project="6a2aecb5c3293c121782ac98"></script>
       </head>
-      <body className="font-sans antialiased min-h-screen flex flex-col bg-white text-slate-900">
+      <body className="font-sans antialiased min-h-screen flex flex-col bg-white" style={{ color: '#0f1c33' }}>
         <Header settings={settings} />
         <main className="flex-1">{children}</main>
         <Footer settings={settings} />

@@ -7,31 +7,42 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Therapy Ally brand — deep navy/teal palette
         brand: {
-          50: '#eef6ff',
-          100: '#d9eaff',
-          200: '#bcd9ff',
-          300: '#8ec1ff',
-          400: '#599eff',
-          500: '#3279fb',
-          600: '#1c59f0',
-          700: '#1545dd',
-          800: '#1839b3',
-          900: '#19358d',
+          50:  '#edfafa',
+          100: '#d5f5f6',
+          200: '#afecee',
+          300: '#7edce2',
+          400: '#16bdca',
+          500: '#0694a2',
+          600: '#047481',
+          700: '#036672',
+          800: '#05505c',
+          900: '#014451',
         },
+        // Deep navy for text/headings
+        navy: {
+          50:  '#f0f4ff',
+          100: '#e0e9ff',
+          700: '#1a2e4a',
+          800: '#162540',
+          900: '#0f1c33',
+        },
+        // Soft green accent for check marks and highlights
         accent: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
+          50:  '#f0fdf4',
+          100: '#dcfce7',
+          200: '#bbf7d0',
+          400: '#4ade80',
+          500: '#22c55e',
+          600: '#16a34a',
         },
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      borderRadius: {
+        '4xl': '2rem',
       },
     },
   },
