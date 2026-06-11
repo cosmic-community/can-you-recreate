@@ -4,7 +4,10 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #0f1c33;
+  --brand-teal: #047481;
+  --brand-teal-light: #0694a2;
+  --navy: #0f1c33;
 }
 
 html {
@@ -15,4 +18,22 @@ body {
   background-color: var(--background);
   color: var(--foreground);
   font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Therapy Ally specific utilities */
+.ta-gradient-hero {
+  background: linear-gradient(135deg, #0f1c33 0%, #047481 100%);
+}
+
+.ta-gradient-section {
+  background: linear-gradient(180deg, #f8fafc 0%, #edfafa 100%);
+}
+
+.ta-card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ta-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(4, 116, 129, 0.12);
 }

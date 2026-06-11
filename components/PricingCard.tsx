@@ -12,21 +12,29 @@ export default function PricingCard({ plan }: PricingCardProps) {
   const price = getMetafieldValue(plan.metadata?.price)
   const billingPeriod = getMetafieldValue(plan.metadata?.billing_period)
   const description = getMetafieldValue(plan.metadata?.description)
-  const ctaLabel = getMetafieldValue(plan.metadata?.cta_label) || 'Choose Plan'
+  const ctaLabel = getMetafieldValue(plan.metadata?.cta_label) || 'Get Started'
   const highlighted = plan.metadata?.highlighted === true
 
-  const includedRaw = getMetafieldValue(plan.metadata?.included_features)
-  const features = includedRaw
-    .split(/\r?\n/)
-    .map((f) => f.replace(/^[-*•]\s*/, '').trim())
-    .filter(Boolean)
+  // Features stored as JSON array
+  let features: string[] = []
+  try {
+    const raw = plan.metadata?.included_features
+    if (Array.isArray(raw)) {
+      features = raw
+    } else if (typeof raw === 'string') {
+      const parsed = JSON.parse(raw)
+      features = Array.isArray(parsed) ? parsed : []
+    }
+  } catch {
+    features = []
+  }
 
   return (
     <div
-      className={`relative flex h-full flex-col rounded-2xl border p-8 shadow-sm transition-all ${
+      className={`relative flex h-full flex-col rounded-xl p-8 shadow-sm transition-all ${
         highlighted
-          ? 'border-brand-600 bg-white shadow-xl ring-2 ring-brand-600'
-          : 'border-slate-100 bg-white'
+          ? 'border-2 border-brand-500 bg-white shadow-xl'
+          : 'border border-slate-100 bg-white'
       }`}
     >
       {highlighted && (
@@ -34,23 +42,21 @@ export default function PricingCard({ plan }: PricingCardProps) {
           Most Popular
         </span>
       )}
-      <h3 className="text-xl font-bold text-slate-900">{planName}</h3>
-      {description && <p className="mt-2 text-sm text-slate-500">{description}</p>}
+      <h3 className="text-lg font-bold" style={{ color: '#0f1c33' }}>{planName}</h3>
+      {description && <p className="mt-1 text-sm text-slate-400">{description}</p>}
       <div className="mt-6 flex items-baseline gap-1">
-        <span className="text-4xl font-extrabold text-slate-900">{price}</span>
-        {billingPeriod && <span className="text-sm text-slate-500">/{billingPeriod}</span>}
+        <span className="text-4xl font-extrabold" style={{ color: '#0f1c33' }}>{price}</span>
+        {billingPeriod && billingPeriod !== 'custom' && (
+          <span className="text-sm text-slate-400">/{billingPeriod}</span>
+        )}
       </div>
 
       {features.length > 0 && (
         <ul className="mt-6 flex-1 space-y-3">
-          {features.map((feat, i) => (
+          {features.map((feat: string, i: number) => (
             <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
-              <svg className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent-500" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fillRule="evenodd"
-                  d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
-                  clipRule="evenodd"
-                />
+              <svg className="mt-0.5 h-4 w-4 flex-shrink-0 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               {feat}
             </li>
@@ -59,11 +65,11 @@ export default function PricingCard({ plan }: PricingCardProps) {
       )}
 
       <a
-        href="#"
-        className={`mt-8 block rounded-full px-6 py-3 text-center text-sm font-semibold transition-colors ${
+        href="https://clinician.therapyally.ai/clinician-signup"
+        className={`mt-8 block rounded-md px-6 py-3 text-center text-sm font-semibold transition-colors ${
           highlighted
             ? 'bg-brand-600 text-white hover:bg-brand-700'
-            : 'border border-slate-300 text-slate-700 hover:border-slate-400'
+            : 'border border-brand-200 text-brand-700 hover:bg-brand-50'
         }`}
       >
         {ctaLabel}
